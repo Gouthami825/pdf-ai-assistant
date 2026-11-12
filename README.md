@@ -1,4 +1,7 @@
 ## Live Demo
+## Screenshot
+
+![PDF AI Assistant Demo](screenshots/pdf-ai-assistant-demo.png)
 
 Try the app here: https://gouthami825-pdf-ai-assistant-app-psinkn.streamlit.app/
 # PDF AI Assistant
