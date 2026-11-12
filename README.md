@@ -1,3 +1,6 @@
+## Live Demo
+
+Try the app here: https://gouthami825-pdf-ai-assistant-app-psinkn.streamlit.app/
 # PDF AI Assistant
 
 A beginner-friendly **demo** web app that lets you upload a PDF, extract its text, and ask questions answered by a Groq-hosted language model **using only that PDF text**. If the document does not contain the answer, the assistant is instructed to say so clearly.
