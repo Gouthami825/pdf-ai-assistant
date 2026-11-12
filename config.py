@@ -1,20 +1,27 @@
-"""Application configuration loaded from environment variables."""
+
+"""Application configuration loaded from environment variables and Streamlit secrets."""
 
 import os
 from pathlib import Path
 
 from dotenv import load_dotenv
 
-# Load variables from a .env file in the project root (if present).
 _PROJECT_DIR = Path(__file__).resolve().parent
 load_dotenv(_PROJECT_DIR / ".env")
 
-GROQ_API_KEY: str | None = os.getenv("GROQ_API_KEY", "").strip() or None
-GROQ_MODEL: str = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b").strip()
 
-# Safety limits for uploads (bytes). Must match `.streamlit/config.toml` → server.maxUploadSize.
+def get_secret(name: str, default: str = "") -> str:
+    try:
+        import streamlit as st
+        return str(st.secrets.get(name, os.getenv(name, default))).strip()
+    except Exception:
+        return os.getenv(name, default).strip()
+
+
+GROQ_API_KEY: str | None = get_secret("GROQ_API_KEY") or None
+GROQ_MODEL: str = get_secret("GROQ_MODEL", "openai/gpt-oss-20b")
+
 MAX_PDF_SIZE_MB: int = 25
 MAX_PDF_BYTES: int = MAX_PDF_SIZE_MB * 1024 * 1024
 
-# Truncate very long documents before sending to the LLM (character count).
-MAX_CONTEXT_CHARS: int = int(os.getenv("MAX_CONTEXT_CHARS", "120000"))
+MAX_CONTEXT_CHARS: int = int(get_secret("MAX_CONTEXT_CHARS", "120000"))
