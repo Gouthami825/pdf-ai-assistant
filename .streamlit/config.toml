@@ -1,0 +1,5 @@
+# Streamlit server settings for PDF AI Assistant.
+# Keep server.maxUploadSize in sync with MAX_PDF_SIZE_MB in config.py (25 MB).
+
+[server]
+maxUploadSize = 25
